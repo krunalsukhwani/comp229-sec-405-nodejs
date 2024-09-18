@@ -1,15 +1,23 @@
-//Node.js - server side JS Runtime
-//how to import library - how to use library - how to use libraries
-const fs = require('fs');
+//import library: http
+const http = require('http');
 
-const userName = "Tristan";
+//create server
+const server = http.createServer((req, res) => {
 
-fs.writeFile('user-info.txt', 'Name: ' + userName, (err) => {
-    if(err){
-        console.log(err);
+    if(req.url === '/favicon.ico'){
+        res.end();
+        return;
     }
 
-    console.log('successfully wrote content in to the file.');
+    console.log('Incoming Request');
+    console.log(req.method, req.url);
+
+    //send response response to the UI
+    //In which format- sending data to the UI  - HTML
+    //set content type
+    res.setHeader('Content-Type','text/html');
+    res.end('<h1>Hello Friends, Welcome to the web development world</h1>');
 });
 
-console.log(userName);
+//set the port number to start the server
+server.listen(8080);
