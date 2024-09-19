@@ -1,35 +1,20 @@
-//import library - express
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-//middlware to handle the request when click on submit button
-app.use((req, res, next) => {
-    let body = '';
+//bodyparse - to get data from the url , need to configure the URL
+app.use(bodyParser.urlencoded({extended : false}));
 
-    req.on('end', ()=>{
-        const userName = body.split("=")[1];
-        if(userName){
-            req.body = { name : userName };
-        }
-        next();
-    });
-
-    req.on('data', (chunk) => {
-        body += chunk;
-    });
+//post request: display username in the heading tag - path: /user
+app.post('/user', (req, res, next) => {
+    return res.send('<h1>' + req.body.username + '</h1>');
 });
 
-
-//middleware to handle the request GET
-app.use((req, res, next) => {
-
-  if(req.body){
-    return res.send('<h1> Welcome User : ' + req.body.name + '</h1>');
-  }  
-
+//get request: display the form - path : /
+app.get("/", (req, res, next) => {
   res.send(
-    '<form method="POST"><input type="text" name="username"><button type="submit">Create User</button></form>'
+    '<form action="/user" method="POST"><input type="text" name="username"><button type="submit">Create User</button></form>'
   );
 });
 
