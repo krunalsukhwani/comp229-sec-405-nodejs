@@ -1,0 +1,14 @@
+{
+  "name": "comp229-sec-405-nodejs",
+  "version": "1.0.0",
+  "description": "This is the first nodejs application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Krunal Sukhwani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
